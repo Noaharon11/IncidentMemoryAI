@@ -94,5 +94,655 @@
         "body": "No escalation is needed at this stage. Provider Operations will continue monitoring and Merchant Success will update affected merchants."
       }
     ]
+  },
+  {
+    "id": 5,
+    "subject": "CardPay provider timeout spike for BlueHarbor Shop",
+    "owner_team": "Payments Platform",
+    "root_cause": "The fictional CardPay provider returned intermittent gateway timeout responses during authorization.",
+    "resolution": "Payments Platform escalated to Provider Operations and temporarily shifted traffic to a secondary route.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-02 09:12",
+        "body": "BlueHarbor Shop reports an increase in payment authorization timeouts on card checkout."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-02 09:20",
+        "body": "Gateway logs show repeated timeout responses from the fictional CardPay provider while internal latency remains normal."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-02 09:34",
+        "body": "Provider Operations confirmed a regional timeout issue and recommended routing traffic through the backup connector."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-02 09:51",
+        "body": "Traffic was shifted to the secondary route and successful authorization rate returned to normal."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "subject": "Pending wallet withdrawals for NorthPeak Market",
+    "owner_team": "Payments Platform",
+    "root_cause": "A settlement worker backlog delayed wallet withdrawal status updates.",
+    "resolution": "Payments Platform scaled the settlement workers and replayed pending withdrawal updates.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-05 11:03",
+        "body": "NorthPeak Market reports wallet withdrawals staying in pending status longer than expected."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-05 11:14",
+        "body": "Settlement worker queue depth is elevated and completed withdrawals are not being marked final quickly enough."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-05 11:39",
+        "body": "Additional settlement workers were started and the pending backlog is decreasing."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-05 12:02",
+        "body": "Merchant update sent. Pending withdrawals have been replayed and new withdrawals are completing normally."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "subject": "3DS challenge failures for EmberCart",
+    "owner_team": "Card Processing",
+    "root_cause": "The fictional SecureStep 3DS provider returned malformed challenge responses.",
+    "resolution": "Card Processing monitored provider recovery and sent merchant updates while challenge success rates stabilized.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-08 16:22",
+        "body": "EmberCart reports customers failing 3DS challenge authentication during checkout."
+      },
+      {
+        "from": "card-processing@example.com",
+        "timestamp": "2026-06-08 16:31",
+        "body": "Issuer authorization is healthy, but SecureStep challenge responses are malformed for a subset of sessions."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-08 16:49",
+        "body": "The fictional 3DS provider acknowledged a challenge rendering issue and is applying a correction."
+      },
+      {
+        "from": "card-processing@example.com",
+        "timestamp": "2026-06-08 17:18",
+        "body": "Failure rate is back near baseline. Merchant Success should update EmberCart and continue monitoring."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "subject": "Scheduled maintenance for NovaLink payout provider",
+    "owner_team": "Provider Operations",
+    "root_cause": "The fictional NovaLink provider was performing planned maintenance on payout processing.",
+    "resolution": "No escalation was needed. Provider Operations monitored the window and sent a merchant update.",
+    "messages": [
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-10 00:10",
+        "body": "Provider notice: planned maintenance for NovaLink payout processing will run from 2026-06-10 00:30 to 2026-06-10 02:00 UTC. Payout confirmations may be delayed."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-10 00:46",
+        "body": "Alert fired for delayed payout confirmations, and the current alert time falls within the scheduled NovaLink maintenance window."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-10 01:15",
+        "body": "Impact is expected for this maintenance. No escalation required unless payout failures continue after the window."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-10 02:07",
+        "body": "Maintenance ended and payout confirmations are catching up. Merchant update sent."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "subject": "Kubernetes pods stuck pending for ledger-sync service",
+    "owner_team": "DevOps",
+    "root_cause": "Cluster node capacity was exhausted and new ledger-sync pods could not be scheduled.",
+    "resolution": "DevOps added temporary node capacity and rescheduled the pending pods.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-12 07:42",
+        "body": "Alert shows Kubernetes pods stuck in Pending state for the fictional ledger-sync service."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-12 07:50",
+        "body": "Scheduler events show insufficient CPU on the available worker nodes."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-12 08:08",
+        "body": "Temporary node capacity was added and the pending pods started successfully."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "subject": "Container restarts on smart-routing API",
+    "owner_team": "DevOps",
+    "root_cause": "A bad configuration reload caused the smart-routing API container to restart repeatedly.",
+    "resolution": "DevOps rolled back the configuration and confirmed the restart count stopped increasing.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-13 13:05",
+        "body": "Container restart alerts are firing for the fictional smart-routing API service."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-13 13:12",
+        "body": "Restart timestamps align with a configuration reload pushed to the routing deployment."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-13 13:29",
+        "body": "Configuration was rolled back and pods are stable. No merchant impact observed after rollback."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "subject": "Memory quota saturation on risk-score worker",
+    "owner_team": "DevOps",
+    "root_cause": "The risk-score worker memory limit was too low for a large batch job.",
+    "resolution": "DevOps increased the memory limit and split the batch job into smaller chunks.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-14 10:18",
+        "body": "Memory-limit quota saturation alert fired for the fictional risk-score worker."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-14 10:27",
+        "body": "The worker is processing a larger than usual scoring batch and is reaching its configured memory limit."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-14 10:56",
+        "body": "Memory limit was increased and the batch job was split. Worker memory usage is now below warning threshold."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "subject": "Replica lag on payment status database",
+    "owner_team": "Database Operations",
+    "root_cause": "A reporting query caused replication lag on the payment status read replica.",
+    "resolution": "Database Operations terminated the reporting query and replayed delayed status updates.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-15 18:04",
+        "body": "Multiple fictional merchants report stale payment status values in the dashboard."
+      },
+      {
+        "from": "database-ops@example.com",
+        "timestamp": "2026-06-15 18:13",
+        "body": "Payment status read replica is lagging by 19 minutes due to a heavy reporting query."
+      },
+      {
+        "from": "database-ops@example.com",
+        "timestamp": "2026-06-15 18:31",
+        "body": "The reporting query was terminated and replication lag is decreasing."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-15 18:49",
+        "body": "Delayed status updates have replayed and merchant dashboards are current again."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "subject": "Disk space below threshold on audit-log database",
+    "owner_team": "Database Operations",
+    "root_cause": "Audit log retention cleanup did not run and disk usage exceeded the alert threshold.",
+    "resolution": "Database Operations restored the cleanup job and expanded disk capacity.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-16 03:11",
+        "body": "Database disk space alert fired for the fictional audit-log database with free space below 10 percent."
+      },
+      {
+        "from": "database-ops@example.com",
+        "timestamp": "2026-06-16 03:21",
+        "body": "Retention cleanup failed overnight, causing audit log partitions to accumulate."
+      },
+      {
+        "from": "database-ops@example.com",
+        "timestamp": "2026-06-16 03:48",
+        "body": "Cleanup was restored and disk capacity was expanded. Free space is back above the warning threshold."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "subject": "Unexpected low load on checkout gateway",
+    "owner_team": "Operations",
+    "root_cause": "A planned merchant campaign pause reduced traffic to the checkout gateway.",
+    "resolution": "No action was required. Operations confirmed the drop was expected and documented the campaign pause.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-17 06:30",
+        "body": "Unexpected low load alert fired for the fictional checkout gateway service."
+      },
+      {
+        "from": "merchant-success@example.com",
+        "timestamp": "2026-06-17 06:38",
+        "body": "The merchant OakTrail Goods paused a scheduled campaign, so lower checkout traffic is expected."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-17 06:52",
+        "body": "No action required. Service health is normal and traffic decrease matches the campaign pause."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "subject": "Unexpected high load on payout scheduler",
+    "owner_team": "DevOps",
+    "root_cause": "A duplicate scheduler job generated higher than normal payout scheduling requests.",
+    "resolution": "DevOps disabled the duplicate job and monitored queue recovery.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-18 09:44",
+        "body": "Unexpected high load alert fired for the fictional payout scheduler."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-18 09:52",
+        "body": "Two scheduler instances are active after a deployment, causing duplicate payout scheduling requests."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-18 10:09",
+        "body": "Duplicate scheduler was disabled and request volume is returning to expected levels."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-18 10:28",
+        "body": "Queues are stable. Continue monitoring for one hour before closing the incident."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "subject": "Communication errors between cashier and gateway",
+    "owner_team": "Payments Platform",
+    "root_cause": "A TLS certificate bundle mismatch caused communication errors between cashier and gateway services.",
+    "resolution": "Payments Platform deployed the corrected certificate bundle and restarted affected clients.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-19 15:16",
+        "body": "Communication errors increased between the fictional cashier service and payment gateway."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-19 15:25",
+        "body": "Gateway rejects a subset of client requests due to an outdated certificate bundle."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-19 15:47",
+        "body": "Correct certificate bundle deployed and affected clients restarted. Communication errors are clearing."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "subject": "Routing switch sent traffic to inactive connector",
+    "owner_team": "Payments Platform",
+    "root_cause": "A routing rule change sent debit traffic to an inactive fictional connector.",
+    "resolution": "Payments Platform reverted the routing rule and replayed failed debit attempts where possible.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-20 12:02",
+        "body": "Debit approval rate dropped after a traffic switch for merchant PineRiver Retail."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-20 12:11",
+        "body": "New routing rule is sending debit transactions to an inactive connector."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-20 12:24",
+        "body": "Routing rule was reverted and new debit traffic is using the primary connector again."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-20 12:43",
+        "body": "Merchant update sent with replay details for eligible failed attempts."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "subject": "False positive failure rate alert for demo merchant",
+    "owner_team": "Operations",
+    "root_cause": "A synthetic monitoring canary produced test failures that were counted as production failures.",
+    "resolution": "No action was required for production traffic. Operations corrected the alert filter.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-21 08:18",
+        "body": "Failure rate increase alert fired for the fictional demo merchant SlateGarden."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-21 08:27",
+        "body": "Production traffic is healthy. The alert includes synthetic canary failures from a test account."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-21 08:41",
+        "body": "No action required for the merchant. Alert filter updated to exclude canary transactions."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "subject": "Merchant descriptor configuration issue for MapleLane Store",
+    "owner_team": "Merchant Support",
+    "root_cause": "MapleLane Store had an incorrect merchant descriptor configuration for card payments.",
+    "resolution": "Merchant Support corrected the descriptor setting and asked the merchant to retry affected payments.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-22 14:06",
+        "body": "MapleLane Store reports card payments rejected with a merchant configuration error."
+      },
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-06-22 14:18",
+        "body": "The merchant descriptor value does not match the expected card processing profile."
+      },
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-06-22 14:35",
+        "body": "Descriptor setting was corrected. Merchant should retry affected card payments."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "subject": "Provider latency causing checkout communication failures",
+    "owner_team": "Provider Operations",
+    "root_cause": "The fictional QuickBridge provider had elevated latency on status callback delivery.",
+    "resolution": "Provider Operations escalated to the provider and Payments Platform increased callback retry intervals.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-23 17:25",
+        "body": "Checkout communication errors are increasing for merchants using the fictional QuickBridge provider."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-23 17:34",
+        "body": "QuickBridge status callbacks are delayed and some callback requests are timing out."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-23 17:49",
+        "body": "Callback retry intervals were increased to reduce duplicate failures while Provider Operations escalates."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-23 18:21",
+        "body": "Provider latency improved and callback delivery has returned to normal."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "subject": "Planned maintenance for tokenization service",
+    "owner_team": "Provider Operations",
+    "root_cause": "The fictional TokenForge provider was performing planned maintenance on tokenization APIs.",
+    "resolution": "No escalation was needed. Operations monitored the window and updated affected merchants.",
+    "messages": [
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-24 22:00",
+        "body": "Provider notice: planned maintenance for TokenForge tokenization APIs will run from 2026-06-24 22:30 to 2026-06-24 23:30 UTC. New card token creation may be delayed."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-24 22:44",
+        "body": "Token creation delay alert fired and current alert time falls within the planned maintenance window."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-24 23:03",
+        "body": "Behavior matches the expected maintenance impact. Monitor only and update merchants if delays are visible."
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "subject": "Kubernetes image pull issue for notification worker",
+    "owner_team": "DevOps",
+    "root_cause": "A bad image tag caused notification worker pods to remain pending with image pull errors.",
+    "resolution": "DevOps corrected the image tag and redeployed the notification worker.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-25 05:33",
+        "body": "Pods are stuck pending for the fictional notification worker after a deployment."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-25 05:41",
+        "body": "Pod events show image pull failures because the configured image tag does not exist."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-25 05:58",
+        "body": "Image tag corrected and the worker deployment is healthy."
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "subject": "High memory usage on reconciliation service",
+    "owner_team": "DevOps",
+    "root_cause": "The reconciliation service loaded an unusually large settlement file into memory.",
+    "resolution": "DevOps restarted the job with streaming mode and added a memory usage alert annotation.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-26 04:20",
+        "body": "Memory usage close to limits for the fictional reconciliation service."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-26 04:29",
+        "body": "A large settlement file is being loaded fully into memory by the reconciliation job."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-26 04:55",
+        "body": "Job restarted in streaming mode and memory usage returned to normal."
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "subject": "Unexpected low load after merchant disabled checkout",
+    "owner_team": "Merchant Support",
+    "root_cause": "The fictional merchant CedarBasket disabled hosted checkout during a site redesign.",
+    "resolution": "No action was required. Merchant Support confirmed the traffic drop was expected.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-27 12:10",
+        "body": "Unexpected low load alert fired for hosted checkout traffic from CedarBasket."
+      },
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-06-27 12:19",
+        "body": "CedarBasket intentionally disabled hosted checkout while testing a redesigned storefront."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-27 12:37",
+        "body": "No action required. The low load is expected and service health checks are passing."
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "subject": "Manual investigation for intermittent callback failures",
+    "owner_team": "Operations",
+    "root_cause": "The initial root cause was unknown because callback failures were intermittent across several services.",
+    "resolution": "Operations opened a manual investigation and collected logs before assigning ownership.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-28 19:02",
+        "body": "Intermittent callback failures are appearing across several fictional merchant integrations."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-06-28 19:18",
+        "body": "Payment services do not show a consistent error pattern yet. Need logs from gateway, callbacks, and merchant delivery."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-28 19:41",
+        "body": "Manual investigation started. Ownership will be assigned after collecting service logs and impact scope."
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "subject": "High load on fraud decision API",
+    "owner_team": "DevOps",
+    "root_cause": "A merchant batch replay sent a sudden surge of fraud decision requests.",
+    "resolution": "DevOps rate-limited the replay job and monitored API latency until the queue drained.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-29 21:14",
+        "body": "Unexpected high load alert fired for the fictional fraud decision API."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-29 21:23",
+        "body": "Traffic surge is coming from a merchant batch replay rather than live checkout traffic."
+      },
+      {
+        "from": "devops@example.com",
+        "timestamp": "2026-06-29 21:40",
+        "body": "Replay job was rate-limited and API latency is returning to baseline."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-29 22:05",
+        "body": "Monitor only for the next hour unless latency rises again."
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "subject": "3DS provider maintenance caused authentication delays",
+    "owner_team": "Card Processing",
+    "root_cause": "The fictional ShieldGate 3DS provider performed planned maintenance that delayed authentication callbacks.",
+    "resolution": "Card Processing monitored authentication rates and updated merchants; no escalation was needed during the window.",
+    "messages": [
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-06-30 01:00",
+        "body": "Provider notice: planned maintenance for ShieldGate 3DS authentication will run from 2026-06-30 01:15 to 2026-06-30 02:15 UTC. Authentication callbacks may be delayed."
+      },
+      {
+        "from": "card-processing@example.com",
+        "timestamp": "2026-06-30 01:28",
+        "body": "Current 3DS callback delay alert falls within the ShieldGate maintenance window."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-06-30 01:52",
+        "body": "Monitor only and send merchant update. Escalate if failures continue after 02:15 UTC."
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "subject": "Merchant webhook endpoint misconfiguration",
+    "owner_team": "Merchant Support",
+    "root_cause": "The fictional merchant WillowSquare configured an invalid webhook endpoint URL.",
+    "resolution": "Merchant Support updated the endpoint configuration and confirmed webhook delivery succeeded.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-07-01 10:05",
+        "body": "Webhook delivery failures increased for WillowSquare after a merchant configuration change."
+      },
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-07-01 10:17",
+        "body": "The configured webhook endpoint URL contains an invalid path and returns not found responses."
+      },
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-07-01 10:38",
+        "body": "Webhook endpoint configuration was corrected and test delivery succeeded."
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "subject": "Payment provider timeout during regional network issue",
+    "owner_team": "Provider Operations",
+    "root_cause": "The fictional PayRiver provider experienced a regional network issue causing payment request timeouts.",
+    "resolution": "Provider Operations escalated to PayRiver, Payments Platform reduced timeout retries, and merchants were updated.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-07-02 08:32",
+        "body": "Several fictional merchants report payment timeout errors on PayRiver transactions."
+      },
+      {
+        "from": "provider-ops@example.com",
+        "timestamp": "2026-07-02 08:41",
+        "body": "PayRiver has a regional network issue and payment requests are timing out before authorization completes."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-07-02 09:03",
+        "body": "Timeout retries were reduced to avoid duplicate attempts while Provider Operations escalates to PayRiver."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-07-02 09:36",
+        "body": "Provider recovered. Merchants were updated and failed payment attempts can be retried."
+      }
+    ]
   }
 ]
