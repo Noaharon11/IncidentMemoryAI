@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "subject": "PIX payment timeout errors for AlphaGaming",
+    "owner_team": "Payments Platform",
+    "root_cause": "External PIX provider connectivity degraded during peak traffic.",
+    "resolution": "Traffic was switched to the backup provider endpoint and failed payments were retried.",
+    "messages": [
+      {
+        "from": "merchant-support@example.com",
+        "timestamp": "2026-02-11 10:34",
+        "body": "AlphaGaming is reporting timeout errors on PIX deposits. Users see payment pending for several minutes."
+      },
+      {
+        "from": "payments-platform@example.com",
+        "timestamp": "2026-02-11 10:47",
+        "body": "We see increased timeout responses from the PIX provider API. Internal payment service latency looks normal."
+      },
+      {
+        "from": "incident-manager@example.com",
+        "timestamp": "2026-02-11 11:18",
+        "body": "Payments Platform switched PIX traffic to the backup endpoint. New deposits are completing successfully."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "subject": "Pending transaction status updates delayed",
+    "owner_team": "Database Operations",
+    "root_cause": "Database replication lag delayed payment status updates.",
+    "resolution": "The replication service was restarted and pending transaction statuses were replayed.",
+    "messages": [
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-03-04 14:09",
+        "body": "Multiple merchants report transactions stuck in pending status for more than 15 minutes."
+      },
+      {
+        "from": "database-ops@example.com",
+        "timestamp": "2026-03-04 14:22",
+        "body": "Payment status database replica has high replication lag. Application workers are reading stale transaction states."
+      },
+      {
+        "from": "operations@example.com",
+        "timestamp": "2026-03-04 14:51",
+        "body": "Database Operations restarted replication and confirmed delayed transaction updates are clearing."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "subject": "3DS authentication failure spike",
+    "owner_team": "Card Processing",
+    "root_cause": "The external 3DS provider returned temporary technical malfunction responses.",
+    "resolution": "The provider recovered without internal changes. Support monitored failure rates and updated merchants.",
+    "messages": [
+      {
+        "from": "merchant-success@example.com",
+        "timestamp": "2026-04-17 19:36",
+        "body": "NovaPay reports a spike in 3DS authentication failures during checkout."
+      },
+      {
+        "from": "card-processing@example.com",
+        "timestamp": "2026-04-17 19:44",
+        "body": "Card authorization is healthy, but the 3DS provider is returning temporary technical malfunction errors."
+      },
+      {
+        "from": "incident-manager@example.com",
+        "timestamp": "2026-04-17 20:21",
+        "body": "No internal service issue found. Continue monitoring and send merchant updates until provider recovery is stable."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "subject": "Provider maintenance window for bank transfer processing",
+    "owner_team": "Provider Operations",
+    "root_cause": "The provider was performing planned maintenance on bank transfer processing during the alert window.",
+    "resolution": "No escalation was needed. Provider Operations monitored the window and sent a merchant update.",
+    "messages": [
+      {
+        "from": "provider-notifications@example.com",
+        "timestamp": "2026-05-08 01:00",
+        "body": "Provider notice: planned maintenance for bank transfer processing will run from 2026-05-08 01:00 to 2026-05-08 02:30 UTC. Some payment status updates may be delayed during this window."
+      },
+      {
+        "from": "provider-operations@example.com",
+        "timestamp": "2026-05-08 01:18",
+        "body": "Current alert time falls within the provider maintenance window. Delay pattern matches the expected maintenance impact."
+      },
+      {
+        "from": "merchant-success@example.com",
+        "timestamp": "2026-05-08 01:36",
+        "body": "No escalation is needed at this stage. Provider Operations will continue monitoring and Merchant Success will update affected merchants."
+      }
+    ]
+  }
+]

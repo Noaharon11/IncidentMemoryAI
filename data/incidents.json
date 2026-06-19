@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "title": "PIX timeout errors",
+      "content": "Merchant AlphaGaming reported increased timeout errors on PIX payments. The issue started around 10:30 and affected payment status updates. The APM team investigated and found vendor connectivity degradation. Traffic was switched to the backup endpoint and the issue was resolved after 45 minutes."
+    },
+    {
+      "id": 2,
+      "title": "Pending transactions delay",
+      "content": "Merchant BetaBet reported transactions stuck in pending status for more than 15 minutes. Operations checked previous logs and found database latency in the payment status service. DBA restarted the replication service. Transactions were updated successfully after the restart."
+    },
+    {
+      "id": 3,
+      "title": "3DS authentication failures",
+      "content": "Merchant NovaPay had a spike in 3DS authentication failures. The error message was temporary technical malfunction. The issue was escalated to the 3DS provider. No internal service issue was found. The recommendation was to monitor and update the merchant."
+    }
+  ]
